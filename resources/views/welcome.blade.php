@@ -52,13 +52,13 @@
         window.location.href = '/create';
     }
     function goToUpdatePage(){
-        window.location.href = '/Update';
+        window.location.href = '/update';
     }
     function goToAllPage(){
         window.location.href = '/All';
     }
     function goToDeletePage(){
-        window.location.href = '/Delete';
+        window.location.href = '/delete';
     }
 </script>
 </head>
