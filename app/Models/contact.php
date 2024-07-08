@@ -1,4 +1,5 @@
 <?php
+// app/Models/Contact.php
 
 namespace App\Models;
 
@@ -9,6 +10,6 @@ class Contact extends Model
 {
     use HasFactory;
 
-
-    protected $table = 'contacts';
+    protected $fillable = ['name', 'phone', 'email'];
 }
+
