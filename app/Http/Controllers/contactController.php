@@ -68,7 +68,13 @@ class ContactController extends Controller
             $contact->delete();
             return redirect('/')->with('success', 'Contact deleted successfully');
         }
-        return redirect('/')->with('error', 'Contact not found');
+        return redirect('/delete')->with('error', 'Contact not found');
+    }
+
+    public function destroyAll(Request $request)
+    {
+        Contact::truncate();
+        return response()->json(['message' => 'All contacts deleted successfully']);
     }
 
     public function getContactsForDelete()

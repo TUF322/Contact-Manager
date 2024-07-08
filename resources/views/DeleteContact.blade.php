@@ -70,40 +70,36 @@
                 {{ session('success') }}
             </div>
         @endif
-        <!-- resources/views/DeleteContact.blade.php -->
 
-<!-- resources/views/DeleteContact.blade.php -->
-<div class="form-group">
-    <label for="contactSelect">Select Contact</label>
-    <select id="contactSelect" class="form-control">
-        <option value="">Select a contact</option>
-        @foreach($contacts as $contact)
-            <option value="{{ $contact->id }}">{{ $contact->name }}</option>
-        @endforeach
-    </select>
-</div>
-<form id="deleteForm" method="POST" action="{{ url('/delete') }}">
-    @csrf
-    @method('DELETE')
-    <input type="hidden" id="contactId" name="contactId">
-    <div class="form-group">
-        <label for="name">Name</label>
-        <input type="text" class="form-control" id="name" name="name" placeholder="Name" readonly>
+        <div class="form-group">
+            <label for="contactSelect">Select Contact</label>
+            <select id="contactSelect" class="form-control">
+                <option value="">Select a contact</option>
+                @foreach($contacts as $contact)
+                    <option value="{{ $contact->id }}">{{ $contact->name }}</option>
+                @endforeach
+            </select>
+        </div>
+
+        <form id="deleteForm" method="POST" action="{{ url('/delete') }}">
+            @csrf
+            @method('DELETE')
+            <input type="hidden" id="contactId" name="contactId">
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" id="name" name="name" placeholder="Name" readonly>
+            </div>
+            <button type="submit" class="btn btn-danger">Delete Selected Contact</button>
+        </form>
+
+        <div class="button-container">
+            <form id="deleteAllForm" method="POST" action="{{ url('/delete-all') }}">
+                @csrf
+                <button type="submit" class="btn btn-danger">Delete All Contacts</button>
+            </form>
+        </div>
     </div>
-    <button type="submit" class="btn btn-danger">Delete</button>
-</form>
 
-<script>
-    // Add JavaScript to set the form action URL dynamically based on the selected contact
-    document.getElementById('contactSelect').addEventListener('change', function() {
-        var selectedContactId = this.value;
-        document.getElementById('deleteForm').action = '/delete/' + selectedContactId;
-        document.getElementById('contactId').value = selectedContactId;
-    });
-</script>
-
-
-    </div>
     <script>
         document.getElementById('contactSelect').addEventListener('change', function() {
             const contactId = this.value;
@@ -113,8 +109,6 @@
                     .then(data => {
                         document.getElementById('contactId').value = data.id;
                         document.getElementById('name').value = data.name;
-                        document.getElementById('phone').value = data.phone;
-                        document.getElementById('email').value = data.email;
                         document.getElementById('deleteForm').setAttribute('action', `/delete/${data.id}`);
                     })
                     .catch(error => console.error('Error:', error));
@@ -122,6 +116,26 @@
                 document.getElementById('deleteForm').reset();
             }
         });
+
+        document.getElementById('deleteAllForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            if (confirm('Are you sure you want to delete all contacts?')) {
+                fetch('/delete-all', {
+                    method: 'DELETE',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                    }
+                })
+                .then(response => response.json())
+                .then(data => {
+                    alert(data.message); // Show success message or handle as needed
+                    location.reload(); // Refresh the page to reflect changes
+                })
+                .catch(error => console.error('Error:', error));
+            }
+        });
     </script>
+
 </body>
 </html>
