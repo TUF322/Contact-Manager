@@ -1,4 +1,3 @@
-<!-- resources/views/createContact.blade.php -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -62,6 +61,20 @@
         background-color: #0056b3;
     }
 </style>
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const nameInput = document.getElementById("name");
+
+        nameInput.addEventListener("input", function() {
+            const namePattern = /^[A-Za-z\s]+$/;
+            if (!namePattern.test(nameInput.value)) {
+                nameInput.setCustomValidity("Please enter letters only.");
+            } else {
+                nameInput.setCustomValidity("");
+            }
+        });
+    });
+</script>
 </head>
 <body>
     <div class="card">
@@ -80,7 +93,7 @@
             @endif
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{ old('name') }}">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{ old('name') }}" pattern="[A-Za-z\s]+" required>
                 @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror

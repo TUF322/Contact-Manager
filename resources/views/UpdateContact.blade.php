@@ -91,7 +91,7 @@
             <input type="hidden" id="contactId" name="contactId">
             <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{ old('name') }}">
+                <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" placeholder="Name" value="{{ old('name') }}" pattern="[A-Za-z\s]+" required>
                 @error('name')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
