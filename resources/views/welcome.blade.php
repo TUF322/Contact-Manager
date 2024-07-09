@@ -3,7 +3,7 @@
 <head>
 <style>
     body {
-        background-color: rgb(150, 150, 150);
+        background-color:  rgb(255, 255, 255);
         display: flex;
         justify-content: center;
         align-items: center;
@@ -11,19 +11,19 @@
         margin: 0;
     }
     .card {
-        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+        box-shadow: 0 40px 80px 0 rgba(0, 0, 0, 0.538);
         border-radius: 15px;
         width: 50vw;
-        background-color: white;
+        background-color: rgb(255, 255, 255);
         display: flex;
         flex-direction: column;
         align-items: center;
         justify-content: center;
         padding: 20px;
+        outline: 2px solid gray; /* Added outline property */
     }
-    .card:hover {
-        box-shadow: 0 8px 16px 0 rgba(0,0,0,0.2);
-    }
+
+
     .img {
         width: 150px;
         height: 150px;

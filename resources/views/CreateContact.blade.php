@@ -3,7 +3,7 @@
 <head>
 <style>
     body {
-        background-color: rgb(150, 150, 150);
+        background-color:  rgb(79, 79, 79);
         display: flex;
         justify-content: center;
         align-items: center;
